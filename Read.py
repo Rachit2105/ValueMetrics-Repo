@@ -8,8 +8,8 @@ def classify_fund_type(name):
 
 def classify_growth_type(name):
     name = str(name).lower()
-    if any(x in name for x in ["idcw" , "divident"]):   
-        return "Divident"
+    if any(x in name for x in ["idcw" , "dividend" , "Income Distribution cum Capital Withdrawal" , "Payout"]):   
+        return "Dividend"
     else:
         return "growth"
 
