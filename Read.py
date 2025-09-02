@@ -1,19 +1,28 @@
 import pandas as pd
 
-def classify_fund(name):
+def classify_fund_type(name):
     if "regular" in str(name).lower():   
         return "Regular"
     else:
         return "Direct"
 
+def classify_growth_type(name):
+    name = str(name).lower()
+    if any(x in name for x in ["idcw" , "divident"]):   
+        return "Divident"
+    else:
+        return "growth"
+
 
 df = pd.read_csv("AMCdata.csv" , encoding= "utf-8")
 
-df['fund_type'] = df['Scheme NAV Name'].apply(classify_fund)
+df['fund_type'] = df['Scheme NAV Name'].apply(classify_fund_type)
+df['growth_type'] = df['Scheme NAV Name'].apply(classify_growth_type)
 
-df = df[["ISIN Div Payout/ ISIN GrowthISIN Div Reinvestment", "Code", "fund_type"]]
+df = df[["Scheme NAV Name" , "fund_type" ,"growth_type" , "ISIN Div Payout/ ISIN GrowthISIN Div Reinvestment", "Code"]]
 df.rename(columns={"ISIN Div Payout/ ISIN GrowthISIN Div Reinvestment" : "ISIN"} , inplace=True) 
 df.rename(columns={"fund_type" : "Fund Type"} , inplace=True) 
+df.rename(columns={"growth_type" : "Growth Type"} , inplace=True) 
 
 
 df.to_excel("Outfile.xlsx")
