@@ -15,7 +15,7 @@ try:
     df_pivot = df_subset.pivot_table(
         index='Scheme Name',
         columns='Plan Type',
-        values=['Code', 'ISIN Div Payout/ ISIN GrowthISIN Div Reinvestment'],
+        values=['ISIN Div Payout/ ISIN GrowthISIN Div Reinvestment' , 'Code'],
         aggfunc='first'
     ).reset_index()
 
