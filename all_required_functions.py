@@ -22,7 +22,7 @@ def classify_plan(nav_name):
     pass
 
 
-def format_data(file_path: str):
+def format_data(file_path: str, save_file_path: str):
     df = pd.read_csv(file_path)
 
     df['Plan Type'] = df['Scheme NAV Name'].apply(classify_plan)
@@ -44,6 +44,6 @@ def format_data(file_path: str):
                             'Regular Dividend Code', 'Regular Growth Code',
                             'Direct Dividend ISIN', 'Direct Growth ISIN',
                             'Regular Dividend ISIN', 'Regular Growth ISIN']
-
-    return df_pivot.to_excel("AMCdata_formatted.xlsx")
+    
+    df_pivot.to_excel(save_file_path)
 
